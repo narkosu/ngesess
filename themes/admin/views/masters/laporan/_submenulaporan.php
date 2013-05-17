@@ -17,8 +17,9 @@
 			</ul>*/?>
 			
 			<span class="button-group">
-				<a href="#" class="button icon home">Recalculate</a>
-        <a href="<?php echo Yii::app()->createUrl('masters/laporan/rekapitulsai')?>" class="button icon home">Rekap Data</a>
+				<!--<a href="#" class="button icon home">Recalculate</a>-->
+        <a href="<?php echo Yii::app()->createUrl('masters/laporan/rekapitulasi')?>" class="button icon home">Rekap Data</a>
+        <a href="<?php echo Yii::app()->createUrl('masters/laporan/trendmatrix')?>" class="button icon home">Trend Matrix</a>
         <?php /*<a href="<?php echo Yii::app()->createUrl('masters/peserta')?>" class="button icon home">Peserta</a>
 				<a href="<?php echo Yii::app()->createUrl($this->module->id.'/peserta/create')?>" class="button icon add">Tambah</a>
 				*/?>

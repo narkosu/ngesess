@@ -3,7 +3,7 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Pesertas',
+	'Peserta',
 );
 
 $this->menu=array(
@@ -25,10 +25,10 @@ $depid = $this->module->current_departement_id;
 	
 </div>
 
-<div class="container-page">
+<div class="container-page" style="padding:0px">
   
-  <div CLASS="rekapitulasi">
-    <div>PENDIDIKAN</div>
+  <div CLASS="rekapitulasi" style="margin-top:10px;">
+    <h2 class="textTitle" style="padding-left:10px;">PENDIDIKAN</h2>
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="example_pendidikan" >
       <thead style="font-size:12px;">
         <tr>
@@ -45,8 +45,8 @@ $depid = $this->module->current_departement_id;
     
   </div>
   
-  <div  CLASS="rekapitulasi">
-    <div>TANGGAL ASSESSMENT</div>
+  <div  CLASS="rekapitulasi" style="margin-top:10px;">
+    <h2 class="textTitle" style="padding-left:10px;">TANGGAL ASSESSMENT</h2>
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="example_tanggal" >
       <thead style="font-size:12px;">
         <tr>
@@ -63,8 +63,8 @@ $depid = $this->module->current_departement_id;
     
   </div>
   
-  <div  CLASS="rekapitulasi" reltype="rekomendasi">
-    <div>BERDASARKAN REKOMENDASI</div>
+  <div  CLASS="rekapitulasi" reltype="rekomendasi" style="margin-top:10px;">
+    <h2 class="textTitle" style="padding-left:10px;">BERDASARKAN REKOMENDASI</h2>
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="example_rekomendasi" >
       <thead style="font-size:12px;">
         <tr>
@@ -81,8 +81,8 @@ $depid = $this->module->current_departement_id;
     
   </div>
 
-  <div  CLASS="rekapitulasi">
-    <div>BERDASARKAN KINERJA</div>
+  <div  CLASS="rekapitulasi" reltype="kinerja" style="margin-top:10px;">
+    <h2 class="textTitle" style="padding-left:10px;">BERDASARKAN KINERJA</h2>
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="example_kinerja" >
       <thead style="font-size:12px;">
         <tr>
@@ -92,7 +92,7 @@ $depid = $this->module->current_departement_id;
 
         </tr>
       </thead>
-      <tbody style="font-size:12px;">
+      <tbody style="font-size:12px;" id="body_kinerja">
 
       </tbody>
     </table>
@@ -110,7 +110,7 @@ Yii::app()->clientScript->registerScript('REKAPITULASI', "
           data:'typelaporan='+typelaporan,
           success:function(data){
 
-            $('#body_rekomendasi').html(data);
+            $('#body_'+typelaporan).html(data);
 
           }	
           }

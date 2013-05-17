@@ -88,21 +88,20 @@
 		<div id="sidebar">
 			<ul class="menu-sidebar">
 			 <?php if ( Yii::app()->user->getIsSuperAdmin() ) { ?>
-			 <li><a href="<?php echo Yii::app()->createUrl('masters')?>" <?php echo ($this->id == 'default' ? 'class="active"' : '')?>><i class="icon-home"></i> <span>Master</span></a></li>
-			 <li><a href="<?php echo Yii::app()->createUrl('masters/anggota')?>" ><i class="icon-group"></i> <span>Anggota Admin</span></a></li>
-			 <li><a href="<?php echo Yii::app()->createUrl('masters/masterasesor')?>" ><i class="icon-group"></i> <span>Asesor</span></a></li>
+          <li><a href="<?php echo Yii::app()->createUrl('masters')?>" <?php echo ($this->id == 'default' ? 'class="active"' : '')?>><i class="icon-home"></i> <span>Master</span></a></li>
+          <li><a href="<?php echo Yii::app()->createUrl('masters/anggota')?>" ><i class="icon-group"></i> <span>Anggota Admin</span></a></li>
+          <li><a href="<?php echo Yii::app()->createUrl('masters/masterasesor')?>" ><i class="icon-group"></i> <span>Asesor</span></a></li>
+          <li><a href="<?php echo Yii::app()->createUrl('skj')?>" ><i class="icon-group"></i> <span>SKJ</span></a></li>
+          <li><a href="<?php echo Yii::app()->createUrl('masters/peserta')?>" ><i class="icon-group"></i> <span>Peserta</span></a></li>
+          <li><a href="<?php echo Yii::app()->createUrl('masters/peserta/rekapitulasi')?>" ><i class="icon-group"></i> <span>Laporan</span></a></li>
 			 <?php } ?>
-			 <?php if ( Yii::app()->user->getIsSuperAdmin() ) { ?>
-			 <li><a href="<?php echo Yii::app()->createUrl('skj')?>" ><i class="icon-group"></i> <span>SKJ</span></a></li>
-			 <?php } ?>
+			 
 			 <?php if ( Yii::app()->user->getIsAuthor() ) { ?>
-			 <li><a href="<?php echo Yii::app()->createUrl('masters/peserta/asesor')?>" ><i class="icon-group"></i> <span>Peserta</span></a></li>
+          <li><a href="<?php echo Yii::app()->createUrl('#')?>" ><i class="icon-group"></i> <span>Profil</span></a></li>
+          
+          <li><a href="<?php echo Yii::app()->createUrl('masters/peserta/asesor')?>" ><i class="icon-group"></i> <span>Peserta</span></a></li>
 			 <?php } ?>
-			 <?php if ( Yii::app()->user->getIsSuperAdmin() ) { ?>
-			 <li><a href="<?php echo Yii::app()->createUrl('masters/peserta')?>" ><i class="icon-group"></i> <span>Peserta</span></a></li>
-			 <li><a href="<?php echo Yii::app()->createUrl('masters/peserta/rekapitulasi')?>" ><i class="icon-group"></i> <span>Laporan</span></a></li>
-
-			 <?php } ?>
+			 
 			 <?php /*<li><a href="forms.html"><i class="icon-edit"></i> <span>Forms</span></a></li>
 			 <li><a href="widgets.html"><i class="icon-briefcase"></i> <span>Others</span></a></li>
 			 <li><a href="error_404.html"><i class="icon-warning-sign"></i> <span>Errors</span></a></li>

@@ -158,6 +158,11 @@ table.display thead th {
 	* cursor: hand;
 }
 
+table.display tr.summary td {
+	background: #eee;
+  padding:5px 5px;
+}
+
 table.display tfoot th {
 	padding: 0 18px 0 10px;
 	border-top: 1px solid black;
@@ -166,6 +171,15 @@ table.display tfoot th {
 
 table.display tr.heading2 td {
 	border-bottom: 1px solid #aaa;
+}
+
+table.display tr td .smallhead{
+  overflow: hidden;
+  width:20px;
+}
+
+table.display tr {
+	border-bottom: 1px solid #eee;
 }
 
 table.display td {
@@ -571,7 +585,7 @@ font-size: 12px;
 
 .dataTables_wrapper thead { background: none }
 
-.dataTables_wrapper thead th { cursor: pointer; border: none; }
+.dataTables_wrapper thead th { cursor: pointer; border: none; background:#fff !important;}
 
 .dataTables_wrapper tbody tr td { vertical-align: middle !important; }
 

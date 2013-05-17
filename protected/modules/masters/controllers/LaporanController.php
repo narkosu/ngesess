@@ -28,7 +28,7 @@ class LaporanController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('view','LoadRekapitulasi'),
+				'actions'=>array('view','LoadRekapitulasi','Trendmatrix'),
 				'users'=>array('*'),
 			),
 			array('allow',  // allow all users to perform 'index' and 'view' actions
@@ -365,31 +365,49 @@ class LaporanController extends Controller
 	}
   
   public function actionLoadRekapitulasi($departement_id){
-    $type = 'rekomendasi';
+    $type = $_GET['typelaporan'];
+    if (empty($type)) return;
     $criteria=new CDbCriteria;
-    $criteria->select = 'count(*) as _countRekomendasi';
-		$criteria->compare('departement_id',$departement_id);
-    $criteria->group = 'departement_id';
+    switch ($type){
+      case 'rekomendasi':
+        $criteria->select = 'count(*) as _count';
+        $criteria->compare('departement_id',$departement_id);
+        $criteria->group = 'departement_id';
+        $groupBy = 'rekomendasi';
+        $viewBy = 'rekomendasi';
+        $selectFor = 'rekomendasi,count(rekomendasi) as _count';
+        break;
+      case 'kinerja':
+        $criteria->select = 'count(*) as _count';
+        $criteria->compare('departement_id',$departement_id);
+        $criteria->group = 'departement_id';
+        $groupBy = 'data_kinerja';
+        $viewBy = 'data_kinerja';
+        $selectFor = 'data_kinerja,count(data_kinerja) as _count';
+      break;
+    }
+    
     
     $summary = Penilaian::model()->find($criteria);
     
     $criteria=new CDbCriteria;
-    $criteria->select = 'rekomendasi,count(rekomendasi) as _countRekomendasi';
+    $criteria->select = $selectFor;
 		$criteria->compare('departement_id',$departement_id);
-    $criteria->group = 'rekomendasi';
+    $criteria->group = $groupBy;
+    
 		$penilaian = Penilaian::model()->findAll($criteria);
     $return = '';
     foreach ((array)$penilaian as $row){
       $return .='<tr>';
-      $return .= '<td>'.$row->rekomendasi.'</td>';
-      $return .= '<td>'.ceil($row->_countRekomendasi).'</td>';
-      $return .= '<td>'.round((ceil($row->_countRekomendasi)/ceil($summary->_countRekomendasi))*100).'%</td>';
+      $return .= '<td>'.$row->$viewBy.'</td>';
+      $return .= '<td>'.ceil($row->_count).'</td>';
+      $return .= '<td>'.round((ceil($row->_count)/ceil($summary->_count))*100).'%</td>';
       $return .='</tr>';
       
     }
-    $return .='<tr>';
+    $return .='<tr class="summary">';
       $return .= '<td>GRAND TOTAL</td>';
-      $return .= '<td>'.ceil($summary->_countRekomendasi).'</td>';
+      $return .= '<td>'.ceil($summary->_count).'</td>';
       $return .= '<td>100%</td>';
       $return .='</tr>';
     echo $return;
@@ -404,6 +422,14 @@ class LaporanController extends Controller
     $this->render('rekap',array(
 			
 			'urlAjax'=> Yii::app()->createUrl('masters/peserta/LoadProcessingLaporan')
+		));
+	}
+	
+  
+  public function actionTrendmatrix()
+	{
+    $this->render('rekaptrendmatrix',array(
+			'urlAjax'=> Yii::app()->createUrl('penilaian/laporan/LoadProcessingtrendmatrix/dept_id/'.  $this->module->current_departement_id)
 		));
 	}
 	

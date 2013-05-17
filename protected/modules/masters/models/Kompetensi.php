@@ -106,4 +106,9 @@ class Kompetensi extends CActiveRecord
   public function jumlahKompetensi(){
     return $this->count('jeniskompetensi_id = :jkid',array(':jkid'=>$this->jeniskompetensi_id));
   }
+  
+  public function listKompetensi($dept_id){
+    return $this->findAll('departement_id = :dept_id',
+            array(':dept_id'=>$dept_id));
+  }
 }

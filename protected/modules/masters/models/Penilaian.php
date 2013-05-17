@@ -18,7 +18,7 @@ class Penilaian extends CActiveRecord
 	 * @param string $className active record class name.
 	 * @return Penilaian the static model class
 	 */
-  public $_countRekomendasi;
+  public $_count;
   public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
@@ -59,6 +59,7 @@ class Penilaian extends CActiveRecord
 			'itemskj'=>array(self::BELONGS_TO,'Itemskj','itemskj_id'),
 			'kompetensiskj'=>array(self::MANY_MANY,'Itemskj','tbl_kompetensiskj(skj_id,itemskj_id)'),
 			'pesertaasesor' => array(self::BELONGS_TO, 'Pesertaasesor', 'assessor_id,peserta_id'),
+      'detail' => array(self::HAS_MANY, 'Detailpenilaian', 'penilaian_id'),
       'asesor' => array(self::BELONGS_TO, 'Masterasesor', 'assessor_id'),
 		);
 	}

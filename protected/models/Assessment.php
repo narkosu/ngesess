@@ -84,10 +84,12 @@ class Assessment extends CModel
       }  
         
 		}
-    echo $nilaiakhir.' '.$rekomendasi['id'].'<br>';
+    //echo $nilaiakhir.' '.$rekomendasi['id'].'<br>';
 		return array('result'=>$rekomendasi,'data'=>$getRekomendasi);
 	}
 	
+  
+  
 	public function matrix($iddepartement='',$rekomendasi = '',$datakinerja = ''){
 		if (empty($iddepartement) ) return;
 		if (empty($rekomendasi) ) return;
@@ -150,12 +152,12 @@ class Assessment extends CModel
     foreach ((array) $penilaian as $row){
       $pid = $row->id;
       unset($nilai);
-      $nilai = $this->__calculation($pid);
+      $nilai = round($this->__calculation($pid));
       $updatePenilaian = $row;
       $updatePenilaian->persentase_pemenuhan = $nilai;
       $updatePenilaian->rekomendasi = $this->__getRekomendasi($departement,$nilai);
       $updatePenilaian->save();
-      echo '<br>'.$pid.' = '.$nilai.' : '.$updatePenilaian->rekomendasi.'<br>';
+      echo '<br>peserta '.$row->peserta_id.' =>  '.$pid.' = '.$nilai.' : '.$updatePenilaian->rekomendasi.'<br>';
       
     }
   }
@@ -174,8 +176,9 @@ class Assessment extends CModel
       $asses->standard = $data->nilai_default;
       $asses->departement = $data->penilaian->departement_id;
       $asses->jumlahkompetensi = $jumlahkompetensi;
-      
-      $result += $asses->calculate();
+      $calculasi = $asses->calculate();
+      $result += $calculasi;
+      echo '<br>'.$result .' = '.$calculasi.' -> '.round($calculasi) .'<br>';
     }
     
     return $result;

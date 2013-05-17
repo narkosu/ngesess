@@ -14,7 +14,7 @@ class LaporanController extends Controller
 	public function accessRules() {
 		return array(
 				array('allow',
-					'actions'=>array('download'),
+					'actions'=>array('download','LoadProcessingtrendmatrix'),
 					'users' => array('@'),
 					),
 				
@@ -24,6 +24,79 @@ class LaporanController extends Controller
 				);
 	}
 	
+  public function actionLoadProcessingtrendmatrix($dept_id){
+		
+    $rekomendasi = 'P';
+    $kinerja = 'B';
+    
+    $criteria=new CDbCriteria;
+		$criteria->compare('id_departemen',$dept_id);
+    $criteria->together = true;
+    $criteria->with = array('penilaian');
+    
+		
+		if ( !empty($_GET['sSearch'])){
+			$criteria->compare('nama_peserta',$_GET['sSearch'],true,'AND',TRUE);
+		}
+    
+    /* filter rekomendaSI */
+    if ( !empty($_GET['sSearch_20'])){
+      $criteria->compare('penilaian.rekomendasi',json_decode($_GET['sSearch_20'])->rekomendasi);
+      $criteria->compare('penilaian.data_kinerja',json_decode($_GET['sSearch_20'])->data_kinerja);
+    }
+   
+    
+		if ( !empty($_GET['iSortCol_0'])){
+			 $criteria->order = $DEFAULTCOL[$_GET['iSortCol_0']].' '.$_GET['sSortDir_0'];
+			//$criteria->ORDER('nama_peserta',$_GET['sSearch'],true,'AND',TRUE);
+		}
+		
+		$Count = Peserta::model()->count($criteria);
+		
+		$criteria->offset = $_GET['iDisplayStart'];
+		
+		$criteria->limit = $_GET['iDisplayLength'];
+		
+		
+		$items = Peserta::model()
+			->findAll($criteria);
+			
+		/*$items = Pesertaasesor::model()
+			->findAll($criteria);
+		*/	
+		$output = array(
+			"sEcho" => intval($_GET['sEcho']),
+			"iTotalRecords" => $Count,
+			"iTotalDisplayRecords" => $Count,
+			"aaData" => array()
+		);
+
+		foreach ($items as $i=>$iskj){
+			unset($row);
+			
+			foreach ($iskj as $field => $vale){
+				
+				$row[$field] = $vale;
+				
+			}
+      
+			foreach ($iskj->penilaian->detail as $nilai){
+        $row['komp_'.$nilai->kompetensi_id] = $nilai->nilai;
+      }
+			$row['penilaian'] = $iskj->penilaian['persentase_pemenuhan'];
+			
+      $rekomendasi = Assessment::model()->rekomendasi($dept_id,$row['penilaian']);
+      $row['rekomendasi'] = $rekomendasi['result']['caption'];
+      $row['kinerja'] = $iskj->penilaian->data_kinerja;
+      
+			$row['ids'] = $iskj->id;//for else
+			$output['aaData'][] = $row;
+		}
+		
+		//print_r($output);
+		echo json_encode($output);
+	}
+  
 	public function actionIndex()
 	{
 		//echo Yii::app()->request->getQuery('user');

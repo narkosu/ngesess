@@ -50,7 +50,7 @@ class cdatatables extends CWidget {
 						'sPaginationType': 'full_numbers',
 						'bProcessing': true,
 						'bServerSide': true,
-						'sAjaxSource': '".Yii::app()->createUrl('/skj/itemskj/load_server_processing/skjid/1')."',
+						'sAjaxSource': '".Yii::app()->createUrl('/skj/itemskj/load_server_processing/skjid/1')."' ,
 						'fnServerData': function ( sSource, aoData, fnCallback ) {
 											/* Add some extra data to the sender */
 											//aoData.push( { 'name': 'more_data', 'value': 'my_value' } );
@@ -85,7 +85,22 @@ class cdatatables extends CWidget {
 					); // DATATABLES
 
 					
-					
+        function fnCreateSelect( aData )
+        {
+          var r='<select><option value=\"\"></option>', i, iLen=aData.length;
+          for ( i=0 ; i<iLen ; i++ )
+          {
+            r += '<option value=\"'+aData[i]+'\">'+aData[i]+'</option>';
+          }
+          return r+'</select>';
+        }
+        
+					$('tfoot th').each( function ( i ) {
+              this.innerHTML = fnCreateSelect( oTable.fnGetColumnData(i) );
+              $('select', this).change( function () {
+                oTable.fnFilter( $(this).val(), i );
+              } );
+            } );
 					
 				} );
 		";

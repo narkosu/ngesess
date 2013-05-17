@@ -198,7 +198,12 @@ $depid = $this->module->current_departement_id;
 	<div style="clear:both;"></div>
 	<div id="headerdata_kinerja" class="header_sub_title">DATA KINERJA</div>
 	<div id="textdata_kinerja">
-		<?php echo $form->textField($model,'data_kinerja',array('size'=>30,'maxlength'=>30)); ?>
+    
+    <?php echo $form->dropDownList($model,'data_kinerja',array('B'=>'Baik','C'=>'Cukup'), array('empty' => 'Kinerja',
+																			 
+              ));
+					?>
+		<?php //echo $form->textField($model,'data_kinerja',array('size'=>30,'maxlength'=>30)); ?>
 		
 	</div>
 	
