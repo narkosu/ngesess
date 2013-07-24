@@ -210,7 +210,10 @@ class MasterasesorController extends Controller
 	public function actionLoadProcessing(){
 		$criteria=new CDbCriteria;
 		//$criteria->compare('id_departemen',$this->module->current_departement_id);
-		
+		if ( !empty($_GET['sSearch'])){
+			$criteria->compare('nama_asesor',$_GET['sSearch'],true,'AND',TRUE);
+		}
+    
 		$Count = Masterasesor::model()->count($criteria);
 		
 		//$criteria->with = array('dept');

@@ -91,7 +91,7 @@ $column[] = array(
 									
 										}"
 							);
-
+if ( is_array($__column))
 $column = array_merge($column, $__column);
 
 $column[] = array( "mDataProp"=> "penilaian","bSearchable"=> false,
@@ -112,7 +112,7 @@ $this->widget('ext.cdatatables.cdatatables',array(
 				)
 			));
 ?>
-<div class="tulisnilai">asdd</div>
+
 <?php 
 Yii::app()->clientScript->registerScript('formnilai_s', "
 $(document).delegate('#trend_matrix','change',function(){

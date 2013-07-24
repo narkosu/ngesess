@@ -152,13 +152,14 @@ class LaporanController extends Controller
 		Yii::import('application.extensions.phpdocx.Phpdocx',array('options'=>array('filetemp'=>'satu')));
 		
 		$phpdocx = new Phpdocx(array('filetemp'=>$this->getCurrentViewPath()));
+    
 		$docx = new CreateDocx();
 		
 		
 		/* load template */
 		
 		$docx->setTemporaryDirectory($this->getCurrentViewPath());
-		$docx->addTemplate($this->getCurrentViewPath().'/templatekpk.docx');
+		$docx->addTemplate($this->getCurrentViewPath().'/'.Yii::app()->params['template_laporan'][$this->module->current_departement_id]);
 		
 		$docx->addTemplateVariable('nomortest', $loadPeserta->nip);
 		$docx->addTemplateVariable('nip', '');
@@ -247,14 +248,7 @@ class LaporanController extends Controller
 			}
 		}
 		
-		/*if ( $kuat > $lemah){
-			$output['recomend'] = 'disarankan';
-		}else if ( $kuat < $lemah ) {
-			$output['recomend'] = 'belumdisarankan';
-		}else{
-			$output['recomend'] = 'dipertimbangkan';
-		}
-		*/
+		
 		return $output;
 	}
   
