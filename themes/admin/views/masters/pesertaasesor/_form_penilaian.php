@@ -199,7 +199,7 @@ $depid = $this->module->current_departement_id;
 	<div id="headerdata_kinerja" class="header_sub_title">DATA KINERJA</div>
 	<div id="textdata_kinerja">
     
-    <?php echo $form->dropDownList($model,'data_kinerja',array('B'=>'Baik','C'=>'Cukup'), array('empty' => 'Kinerja',
+    <?php echo $form->dropDownList($model,'data_kinerja',array('B'=>'Baik','C'=>'Cukup','K'=>'Kurang'), array('empty' => 'Kinerja',
 																			 
               ));
 					?>
@@ -235,11 +235,24 @@ Yii::app()->clientScript->registerScript('formnilai_s', "
 $(document).delegate('.tulisnilai','click',function(){
 	var thisparent = $(this).parents('tr');
 	var id_komp = thisparent.attr('data-id') ;
+  var depid = '".$depid."';
 	var nilai = $(this).val();
 	$('#total_'+id_komp).attr('datanilai',nilai); // persentase
-	
+	//alert($('.tulisnilai').serialize());
+  $.ajax(
+        { url: '".Yii::app()->createUrl('masters/pesertaasesor/calculate')."',
+          data:$('.tulisnilai').serialize()+'&departement='+depid,
+          dataType:'json',
+          success:function(data){
+          //console.log(data);
+          $('#persentase_kompetensi').val(data.totalCalculate);
+
+          }
+        }
+        );
+        
 	/* ajax */
-	$('.jeniskompetensi').each(function() {
+	/*$('.jeniskompetensi').each(function() {
 		var rowid = $(this).attr('dataid');
 		var nilaiJK = $(this).attr('data-persentase');
 		var depid = '".$depid."';
@@ -272,14 +285,15 @@ $(document).delegate('.tulisnilai','click',function(){
 			//console.log('jkon + '+rowid + ' =  nilai gap : '+nilai_gap + ' = ' + hasil_gap);
 		});
 		
-		/*
+    
+		/ *
 		var hasilgroup = persentase*(sumnilai/sumdfault);
 		console.log(' -- def + '+rowid + ' = '+sumnilai + '/ ' + sumdfault + ' = '+ hasilgroup );
 		hasil_assessment = hasil_assessment + hasilgroup;
-		*/
+		* /
 		
     });
-	
+    */
 	
 	/*var thisparent = $(this).parents('tr');
 	var id_komp = thisparent.attr('data-id') ;

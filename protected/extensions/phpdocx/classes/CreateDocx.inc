@@ -3330,7 +3330,7 @@ class CreateDocx extends CreateDocument
     {
         $table = CreateTable::getInstance();
         $table->createTable($dats, $parameters);
-        self::$log->info('Add table to word document.');
+        //self::$log->info('Add table to word document.');
         $this->_wordDocumentC .= (string) $table;
     }
 
@@ -3346,7 +3346,7 @@ class CreateDocx extends CreateDocument
     {
         $tableContents = CreateTableContents::getInstance();
         $tableContents->createTableContents($font);
-        self::$log->info('Add table of contents to word document.');
+        //self::$log->info('Add table of contents to word document.');
         $this->_wordDocumentC .= (string) $tableContents;
     }
 

@@ -1,5 +1,4 @@
-
-		<?php 
+<?php 
 			$kompetensi = Kompetensi::model()->findAll('departement_id = "'.$this->module->current_departement_id.'"');
 			$getsaranarray = Saranpengembangan::model()->getsaranarray($this->module->current_departement_id);
 		?>

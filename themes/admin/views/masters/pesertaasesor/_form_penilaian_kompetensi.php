@@ -58,6 +58,7 @@
 				if ( $jkom != $nowjkom ){
 					$nowjkom = $jkom;
 			?>
+        <input type="hidden" class="tulisnilai" name="datapersentase[<?php echo $jkom?>]" value="<?php echo $value_komp->jenkom->nilai_persentase?>">
 				<tr style="font-weight:bold;" class="jeniskompetensi" dataid="<?php echo $jkom?>" data-persentase="<?php echo $value_komp->jenkom->nilai_persentase?>">
 					<td style="border-top:1px solid #aaa;font-weight:bold;width:250px;border-bottom:1px solid #aaa;"><?php echo $value_komp->jenkom->name?></td>
 					<td style="border-top:1px solid #aaa;border-bottom:1px solid #aaa;font-weight:bold;text-align: center;">1</td>
@@ -78,51 +79,51 @@
 					<?php if ($preview ) { ?>
 						<?php echo (isset($selected[1]) ? 'X' :'')?>
 					<?php } else { ?>
-						<input style="width:20px;" class="tulisnilai" type="radio" name="Kompetensiskj[<?php echo $jkom?>][<?php echo $value_komp->id?>][nilai]" value="1" <?php echo $selected[1]?>  >
+						<input style="width:35px;" class="tulisnilai" type="radio" name="Kompetensiskj[<?php echo $jkom?>][<?php echo $value_komp->id?>][nilai]" value="1" <?php echo $selected[1]?>  >
 					<?php } ?>
 				</td>
 				<td  class= "nilaikompetensi" style="border-bottom:1px solid #eee;padding:5px 0px;<?php echo $style[2]?>">
 					<?php if ($preview ) { ?>
 						<?php echo (isset($selected[2]) ? 'X' :'')?>
 					<?php } else { ?>
-					<input style="width:20px;"  class="tulisnilai" type="radio" name="Kompetensiskj[<?php echo $jkom?>][<?php echo $value_komp->id?>][nilai]"  value="2" <?php echo $selected[2]?>  >
+					<input style="width:35px;"  class="tulisnilai" type="radio" name="Kompetensiskj[<?php echo $jkom?>][<?php echo $value_komp->id?>][nilai]"  value="2" <?php echo $selected[2]?>  >
 					<?php } ?>
 				</td>
 				<td  class= "nilaikompetensi" style="border-bottom:1px solid #eee;padding:5px 0px;<?php echo $style[3]?>">
 				<?php if ($preview ) { ?>
 						<?php echo (isset($selected[3]) ? 'X' :'')?>
 					<?php } else { ?>
-					<input style="width:20px;"  class="tulisnilai" type="radio" name="Kompetensiskj[<?php echo $jkom?>][<?php echo $value_komp->id?>][nilai]"  value="3" <?php echo $selected[3]?>  >
+					<input style="width:35px;"  class="tulisnilai" type="radio" name="Kompetensiskj[<?php echo $jkom?>][<?php echo $value_komp->id?>][nilai]"  value="3" <?php echo $selected[3]?>  >
 					<?php } ?>
 				</td>
 				<td  class= "nilaikompetensi" style="border-bottom:1px solid #eee;padding:5px 0px;<?php echo $style[4]?>">
 				<?php if ($preview ) { ?>
 						<?php echo (isset($selected[4]) ? 'X' :'')?>
 					<?php } else { ?>
-					<input style="width:20px;"  class="tulisnilai" type="radio" name="Kompetensiskj[<?php echo $jkom?>][<?php echo $value_komp->id?>][nilai]"  value="4" <?php echo $selected[4]?>  >
+					<input style="width:35px;"  class="tulisnilai" type="radio" name="Kompetensiskj[<?php echo $jkom?>][<?php echo $value_komp->id?>][nilai]"  value="4" <?php echo $selected[4]?>  >
 					<?php } ?>
 				</td>
 				<td  class= "nilaikompetensi" style="border-bottom:1px solid #eee;padding:5px 0px;<?php echo $style[5]?>">
 					<?php if ($preview ) { ?>
 						<?php echo (isset($selected[5]) ? 'X' :'')?>
 					<?php } else { ?>
-						<input style="width:20px;"  class="tulisnilai" type="radio" name="Kompetensiskj[<?php echo $jkom?>][<?php echo $value_komp->id?>][nilai]"  value="5" <?php echo $selected[5]?>  >
+						<input style="width:35px;"  class="tulisnilai" type="radio" name="Kompetensiskj[<?php echo $jkom?>][<?php echo $value_komp->id?>][nilai]"  value="5" <?php echo $selected[5]?>  >
 						<?php } ?>
 				</td>
 				<td  class= "nilaikompetensi" style="border-bottom:1px solid #eee;padding:5px 0px;<?php echo $style[6]?>">
 					<?php if ($preview ) { ?>
 						<?php echo (isset($selected[6]) ? 'X' :'')?>
 					<?php } else { ?>
-					<input style="width:20px;"  class="tulisnilai" type="radio" name="Kompetensiskj[<?php echo $jkom?>][<?php echo $value_komp->id?>][nilai]"  value="6" <?php echo $selected[6]?>  >
+					<input style="width:35px;"  class="tulisnilai" type="radio" name="Kompetensiskj[<?php echo $jkom?>][<?php echo $value_komp->id?>][nilai]"  value="6" <?php echo $selected[6]?>  >
 					<?php } ?>
 				</td>
 				<td class= "nilaikompetensi" style="border-bottom:1px solid #eee;padding:5px 0px;">
 				<?php if ($preview ) { ?>
 				<?php echo $nilaiakhir?>
 				<?php }else{ ?>
-					<input style="width:20px;" class="nilaifinal" groupdata="jeniskompetensi_<?php echo $jkom?>" datajkomp = "<?php echo $jkom?>" datakomp = "<?php echo $value_komp->id?>" datadefault="<?php echo $nilaiDefault?>" datanilai = "<?php echo empty($nilaiselected) ? 0 : $nilaiselected ?>" id="total_<?php echo $jkom?>_<?php echo $value_komp->id?>" type="text" name="Kompetensiskj[<?php echo $jkom?>][<?php echo $value_komp->id?>][total]" value="<?php echo $nilaiakhir?>" readonly>	
+					<input style="width:35px;" class="nilaifinal" groupdata="jeniskompetensi_<?php echo $jkom?>" datajkomp = "<?php echo $jkom?>" datakomp = "<?php echo $value_komp->id?>" datadefault="<?php echo $nilaiDefault?>" datanilai = "<?php echo empty($nilaiselected) ? 0 : $nilaiselected ?>" id="total_<?php echo $jkom?>_<?php echo $value_komp->id?>" type="text" name="Kompetensiskj[<?php echo $jkom?>][<?php echo $value_komp->id?>][total]" value="<?php echo $nilaiakhir?>" readonly>	
 				<?php } ?>
-					<input style="width:20px;"  id="default_<?php echo $jkom?>_<?php echo $value_komp->id?>" type="hidden" name="Kompetensiskj[<?php echo $jkom?>][<?php echo $value_komp->id?>][default]" value="<?php echo $nilaiDefault?>">
+					<input style="width:35px;" class="tulisnilai" id="default_<?php echo $jkom?>_<?php echo $value_komp->id?>" type="hidden" name="Kompetensiskj[<?php echo $jkom?>][<?php echo $value_komp->id?>][default]" value="<?php echo $nilaiDefault?>">
 				</td>
 
 				</tr>
@@ -137,7 +138,7 @@
 				<?php if ($preview ) { ?>
 					<?php echo $total_akhir?>
 				<?php }else{ ?>
-					<input style="width:20px;" id="total_final" type="text" name="Kompetensiskj_final" value="<?php echo $total_akhir?>" readonly>
+					<input style="width:35px;" id="total_final" type="text" name="Kompetensiskj_final" value="<?php echo $total_akhir?>" readonly>
 					<?php } ?>
 				</td>
 			</tr>
@@ -149,7 +150,7 @@
 				<?php if ($preview ) { ?>
 					<?php echo $model->persentase_pemenuhan?>
 				<?php }else{ ?>
-					<input style="width:20px;" id="persentase_kompetensi" type="text" name="persentase_kompetensi" value="<?php echo $model->persentase_pemenuhan?>" readonly>
+					<input style="width:35px;" id="persentase_kompetensi" type="text" name="persentase_kompetensi" value="<?php echo $model->persentase_pemenuhan?>" readonly>
 					<?php } ?>
 				</td>
 			</tr>

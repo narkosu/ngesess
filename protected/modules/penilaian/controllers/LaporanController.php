@@ -180,10 +180,11 @@ class LaporanController extends Controller
 		$docx->addTemplateVariable('uraian_profile_kompetensi', $kompetensiForm['uraianKompetensi'],'html');
 		$docx->addTemplateVariable('ringkasan_profile_kompetensi', $kompetensiForm['ringkasanKompetensi'],'html');
 		$docx->addTemplateVariable('saran_pengembangan', $kompetensiForm['saranpengembangan'],'html');
-		$docx->addTemplateVariable('kesimpulan',  nl2br($model->kesimpulan_umum),'html');
+		$docx->addTemplateVariable('kesimpulan',  '<div style="font-family:\'arial narrow\';font-size:11pt;line-height:150%;text-align:justify;">'.nl2br($model->kesimpulan_umum).'</div>','html');
 		$docx->addTemplateVariable('untuk_posisi', $kompetensiForm['jabatan']->jabatan_name);
 		
 		//$docx->addFooter($footer_text, $paramsFooter);
+    
 		/* halaman depan */
 		$onlyfilename  = $filename.'.docx';
 		$filename = $this->getCurrentViewPath().'/'.$filename;
@@ -210,7 +211,8 @@ class LaporanController extends Controller
 		$params['itemkompetensi'] = $modelkompetensisjk;
 		switch($params['onview']){
 		case 'doc':
-			$output['loadkompetensi'] = $this->renderPartial('//masters/pesertaasesor/_cetak_penilaian_kompetensi',$params,true,true);
+      $profile_template = Yii::app()->params['sub_template'][$this->module->current_departement_id]['profile_kompetensi'];
+			$output['loadkompetensi'] = $this->renderPartial($profile_template.'_cetak',$params,true,true);
 			
 			$output['uraianKompetensi'] = $this->renderPartial('//masters/pesertaasesor/_cetak_penilaian_uraian_kompetensi',$params,true,true);
 			$params['ringkasan'] = $this->ringkasanProfil($params['nilai']);

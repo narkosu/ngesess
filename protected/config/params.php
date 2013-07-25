@@ -25,5 +25,7 @@ return array(
 	// the copyright information displayed in the footer section
 	'copyrightInfo'=>'Copyright &copy; 2009 by My Company.',
 	'forumula'=>$formula,
-  'template_laporan'=>  array($kemenhub=>'templatekemenhub.docx',$kpk=>'templatekpk.docx')
+  'template_laporan'=>  array($kemenhub=>'templatekemenhub.docx',$kpk=>'templatekpk.docx'),
+  'sub_template'=>  array($kemenhub=>array('profile_kompetensi'=>'//masters/pesertaasesor/_profile_kompetensi_persentase')
+                      )
 );

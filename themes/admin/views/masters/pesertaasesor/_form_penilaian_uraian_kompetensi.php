@@ -27,9 +27,9 @@
 				<?php } ?>
 				</tr>
 				<tr style="font-weight:bold;">
-					<td >
+					<td style='text-align:justify;'>
 						<?php if ( $preview ) { ?>
-							<?php echo $uraian[$value_komp->id]?>
+							<?php echo nl2br($uraian[$value_komp->id])?>
 						<?php } else { ?>
 							<textarea class="textarea98" name="uraian[<?php echo $value_komp->id?>]"><?php echo $uraian[$value_komp->id]?></textarea>
 						<?php } ?>

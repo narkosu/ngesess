@@ -5,7 +5,7 @@
 	}
 	<?php if ($preview ) { ?>
 		#tblkompetensi{
-		border: 1px solid #aaa;		
+				
 		}
 		#tblkompetensi td.nilaikompetensi{
 			text-align:center;
@@ -34,10 +34,10 @@
 		<?php 
 			$kompetensi = Kompetensi::model()->findAll('departement_id = "'.$this->module->current_departement_id.'"');
 		?>
-		<table id="tblkompetensi" style="border: 1px solid #aaa;width:90%;font-size:12pt;font-family: 'arial narrow';">
+		<table id="tblkompetensi" style="width:90%;font-size:12pt;font-family: 'arial narrow';">
 			<tr>
-				<th style="border-left:1px solid #aaa;border-top:1px solid #aaa;">Area Kekuatan</th>
-				<th style="border-left:1px solid #aaa;border-top:1px solid #aaa;border-right:1px solid #aaa;">Area yang Memerlukan Peningkatan</th>
+				<th style="text-align:left;">Area Kekuatan</th>
+				<th style="text-align:left;">Area yang Memerlukan Peningkatan</th>
 			</tr>
 			<tr>
 			<td style="vertical-align: top;">
