@@ -17,6 +17,14 @@ class WebUser extends CWebUser{
 	function getIsAuthor(){
 		return ( $this->user && $this->user->accessLevel == User::LEVEL_AUTHOR );
 	}
+  
+  function getIsMember(){
+		return ( $this->user && $this->user->accessLevel == User::LEVEL_MEMBER );
+	}
+  
+  function getUserPeserta(){
+		return ( Yii::app()->user->getState('userpeserta'));
+	}
 	 //get the logged user
 	function getUser(){
 		if( $this->isGuest )

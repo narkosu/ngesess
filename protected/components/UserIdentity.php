@@ -25,6 +25,11 @@ class UserIdentity extends CUserIdentity
 			$this->_id=$user->id;
 			$this->username=$user->username;
 			$this->setState('accessLevel', $user->accessLevel);
+      if ($user->accessLevel == User::LEVEL_MEMBER ){
+        $userpeserta = Userpeserta::model()->find('user_id = :uid',array(':uid'=>$user->id));
+        $this->setState('accessLevel', $user->accessLevel);
+        $this->setState('userpeserta', $userpeserta);
+      }
 			
 			$this->errorCode=self::ERROR_NONE;
 		}

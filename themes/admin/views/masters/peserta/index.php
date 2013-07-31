@@ -76,7 +76,7 @@ $this->menu=array(
 								return '<span class=\"button-group\">'+
 										'<a href=\"".Yii::app()->createUrl('masters/peserta/update/id/')."/'+oObj.aData[0]+'\" class=\"button icon edit\">Edit</a>'+
 										'<a href=\"#\" class=\"button icon remove danger\">Remove</a>'+
-                    '<a href=\"#\" pid=\"'+oObj.aData[5]+'\" class=\"button icon remove danger pilihasessor\">Pilih Asesor</a>'+
+                    '<a href=\"#\" pid=\"'+oObj.aData[5]+'\" class=\"button icon danger pilihasessor\">Pilih Asesor</a>'+
 										'</span>';
                     //return '<a class=\"table-action-deletelink\" href=\"DeleteData.php?test=test&id=' + oObj.aData[4] + '\">Edit</a>';
 									

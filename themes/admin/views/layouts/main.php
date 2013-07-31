@@ -101,7 +101,22 @@
           
           <li><a href="<?php echo Yii::app()->createUrl('masters/peserta/asesor')?>" ><i class="icon-group"></i> <span>Peserta</span></a></li>
 			 <?php } ?>
-			 
+          <?php 
+          //print_r(Yii::app()->user->getUserPeserta());
+          ?>
+          
+			 <?php if ( Yii::app()->user->getIsMember() ) { ?>
+          <li><a href="<?php echo Yii::app()->createUrl('masters/peserta/view/id/'.Yii::app()->user->getUserPeserta()->peserta_id)?>" >
+              <i class="icon-group"></i> <span>Profil</span></a>
+          </li>
+          
+          <li><a href="<?php echo Yii::app()->createUrl('masters/peserta/asesor')?>" >
+              <i class="icon-group"></i> <span>Penilaian</span></a>
+          </li>
+          <li><a href="<?php echo Yii::app()->createUrl('masters/peserta/asesor')?>" >
+              <i class="icon-group"></i> <span>IDP</span></a>
+          </li>
+			 <?php } ?>
 			 <?php /*<li><a href="forms.html"><i class="icon-edit"></i> <span>Forms</span></a></li>
 			 <li><a href="widgets.html"><i class="icon-briefcase"></i> <span>Others</span></a></li>
 			 <li><a href="error_404.html"><i class="icon-warning-sign"></i> <span>Errors</span></a></li>

@@ -176,20 +176,30 @@ $depid = $this->module->current_departement_id;
 		<div style="padding:10px;">
 			<div style="width:20px;height:20px;float:left;border:1px solid #aaa;margin-right:10px;<?php echo $result['P']?>"></div>
 			<div style="float:left;width:700px;">
+        <?php /*
 				<b>"<?php echo $rekomendasi['data']['P']['caption'] ?>"</b> untuk menduduki <?php echo $output['jabatan']->jabatan_name?>. Sebagian besar kompetensi yang dipersyaratkan telah dipenuhi.
+         * 
+         */?>
+        "Fit in" dalam posisi saat ini. Sebagian besar kompetensi yang dipersyaratkan telah dipenuhi. POTENSIAL untuk dikembangkan ke posisi yang lebih tinggi.
+
 			</div>
 			<div style="clear:both;"></div>
 		</div>
 		<div style="padding:10px;">
 			<div style="width:20px;height:20px;float:left;border:1px solid #aaa;margin-right:10px;<?php echo $result['PC']?>"></div>
 			<div style="float:left;width:700px;">
-				<b>"<?php echo $rekomendasi['data']['PC']['caption'] ?>"</b> untuk menduduki Posisi <?php echo $output['jabatan']->jabatan_name?>, dengan catatan masih memerlukan peningkatan pada beberapa kompetensi yang dipersyaratkan.
+				<?php /*<b>"<?php echo $rekomendasi['data']['PC']['caption'] ?>"</b> untuk menduduki Posisi <?php echo $output['jabatan']->jabatan_name?>, dengan catatan masih memerlukan peningkatan pada beberapa kompetensi yang dipersyaratkan.*/?>
+        Masih memerlukan peningkatan pada beberapa kompetensi yang dipersyaratkan pada posisi saat ini. POTENSIAL dengan CATATAN untuk dikembangkan ke posisi yang lebih tinggi.
+
 			</div>
 			<div style="clear:both;"></div>
 		</div>
 		<div style="padding:10px;">
 			<div style="width:20px;height:20px;float:left;border:1px solid #aaa;margin-right:10px;<?php echo $result['KP']?>"></div>
-			<div style="float:left;width:700px;"><b>"<?php echo $rekomendasi['data']['KP']['caption'] ?>"</b> untuk menduduki Posisi <?php echo $output['jabatan']->jabatan_name?>. Sejumlah besar kompetensi yang dipersyaratkan belum dipenuhi.
+			<div style="float:left;width:700px;">
+        <?php /*<b>"<?php echo $rekomendasi['data']['KP']['caption'] ?>"</b> untuk menduduki Posisi <?php echo $output['jabatan']->jabatan_name?>. Sejumlah besar kompetensi yang dipersyaratkan belum dipenuhi.*/?>
+        Memerlukan pembinaan untuk dapat optimal berkontribusi pada posisi saat ini. Saat ini, KURANG POTENSIAL untuk dikembangkan ke posisi yang lebih tinggi
+
 			</div>
 			<div style="clear:both;"></div>
 		</div>

@@ -94,20 +94,49 @@ class PesertaController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
-		$model=$this->loadModel($id);
-
+		$model= $this->loadModel($id);
+    $userpeserta = Userpeserta::model()->find('peserta_id = :pid',array(':pid'=>$id));
+    
+    if ( !empty($userpeserta->user_id) ){
+      $user = User::model()->findByPk($userpeserta->user_id);
+    }else{
+      $user = new User;
+    }
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Peserta']))
 		{
 			$model->attributes=$_POST['Peserta'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			if($model->save()){
+        if ($_POST['ismember'] == 1 ){
+          $user->attributes = $_POST['User'];
+          $user->salt = 'temp';
+          if ($user->validate()){
+            $user->generatePassword($_POST['password']);
+            $user->accessLevel = User::LEVEL_MEMBER;
+            $user->tbl_relation = 'tbl_userpeserta';
+            if ( $user->save()){
+              $userpeserta->user_id = $user->id; 
+              $userpeserta->peserta_id = $id;
+              $userpeserta->save();
+              Yii::app()->user->setFlash('update_success','Update + set user sukses');
+              $this->redirect(array('update','id'=>$model->id));
+            }
+          }
+        }else{
+          Yii::app()->user->setFlash('update_success','Update sukses');
+          $this->redirect(array('update','id'=>$model->id));
+        }
+				
+        //$this->redirect(array('update','id'=>$model->id));
+      }
 		}
 
 		$this->render('update',array(
 			'model'=>$model,
+			'userpeserta'=>$userpeserta,
+			'user'=>$user,
 		));
 	}
 

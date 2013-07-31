@@ -31,9 +31,10 @@
 	<?php } ?>
 	
 </style>
+
 <div style="float:left;width:90%;padding:0px 10px;">
 		<?php 
-			$kompetensi = Kompetensi::model()->findAll('departement_id = "'.$this->module->current_departement_id.'"');
+			$kompetensi = Kompetensi::model()->findAll('departement_id = "'.$departement_id.'"');
 		?>
 		<table id="tblkompetensi" style="width:100%;font-size:12px;">
 			<tr>

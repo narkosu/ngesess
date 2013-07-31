@@ -33,6 +33,10 @@ class PesertaasesorController extends Controller {
             'actions' => array('create', 'update', 'penilaian', 'preview', 'download', 'downloadtemp', 'calculate', 'ajaxform'),
             'expression' => '$user->isSuperAdmin || $user->isAdmin || $user->isAuthor',
         ),
+        array('allow', // allow authenticated user to perform 'create' and 'update' actions
+            'actions' => array('preview'),
+            'expression' => '$user->isMember',
+        ),
         array('allow', // allow admin user to perform 'admin' and 'delete' actions
             'actions' => array('admin', 'delete'),
             'users' => array('admin'),
@@ -140,6 +144,7 @@ class PesertaasesorController extends Controller {
     $hasAccess = Userasesor::model()->hasAccess();
     $loadPeserta = Peserta::model()->findByPk($id);
     $loadPenilaian = Penilaian::model()->find('peserta_id = :pid', array(':pid' => $id));
+    
     if (!isset($loadPenilaian))
       $this->redirect(array('/masters/pesertaasesor/penilaian/id/' . $id));
 

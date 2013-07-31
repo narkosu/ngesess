@@ -12,7 +12,12 @@ class User extends CActiveRecord
 	 * @var string $profile
 	 */
 	
-	const LEVEL_REGISTERED=0, LEVEL_AUTHOR=1, LEVEL_VIEW=3,LEVEL_ADMIN=100, LEVEL_SUPERADMIN=99;
+	const LEVEL_REGISTERED=0;
+  const LEVEL_AUTHOR=1;
+  const LEVEL_VIEW=3;
+  const LEVEL_ADMIN=100;
+  const LEVEL_SUPERADMIN=99;
+  const LEVEL_MEMBER=10;
 	
 	
 	//define the label for each level

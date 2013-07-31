@@ -2,7 +2,7 @@
 /* @var $this PesertaasesorController */
 /* @var $model Pesertaasesor */
 /* @var $form CActiveForm */
-$depid = $this->module->current_departement_id;
+$depid = $departement_id;
 ?>
 
 <?php $this->renderPartial('_submenu_penilaian',array('model'=>$model)); ?>

@@ -29,6 +29,6 @@ $this->menu=array(
 
 <div class="container-page">
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model,'user'=>$user,'userpeserta'=>$userpeserta)); ?>
 <div style="clear: both"></div>
 </div>

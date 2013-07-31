@@ -20,6 +20,8 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.modules.masters.models.Departement',
+		'application.modules.masters.models.Userpeserta',
+		'application.modules.masters.models.Userasesor',
 		'application.components.*',
 	),
 	'modules'=> array('masters','skj','penilaian',

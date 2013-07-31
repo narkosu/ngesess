@@ -6,7 +6,7 @@
 </style>
 <div style="float:left;width:100%;padding:0px 10px;">
 		<?php 
-			$Jeniskompetensi = Jeniskompetensi::model()->findAll('departement_id = "'.$this->module->current_departement_id.'"');
+			$Jeniskompetensi = Jeniskompetensi::model()->findAll('departement_id = "'.$departement_id.'"');
 		?>
 		<table id="tbljeniskompetensi" style="font-size:12px;">
 			

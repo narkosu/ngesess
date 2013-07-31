@@ -17,7 +17,10 @@ class LaporanController extends Controller
 					'actions'=>array('download','LoadProcessingtrendmatrix'),
 					'users' => array('@'),
 					),
-				
+				array('allow',
+					'actions'=>array('preview'),
+					'expression' => '$user->isMember',
+					),
 				array('deny',  // deny all other users
 						'users'=>array('*'),
 						),
@@ -110,6 +113,34 @@ class LaporanController extends Controller
 		));
 	}
 	
+  
+  public function actionPreview($id) {
+    $hasAccess = Userasesor::model()->hasAccess();
+    $loadPeserta = Peserta::model()->findByPk($id);
+    $loadPenilaian = Penilaian::model()->find('peserta_id = :pid', array(':pid' => $id));
+    
+    if (!isset($loadPenilaian))
+      $this->redirect(array('/masters/pesertaasesor/penilaian/id/' . $id));
+    
+    $departement_id =  (!empty($loadPenilaian->departement_id)) ? $loadPenilaian->departement_id : $this->module->current_departement_id;
+    
+    $model = $loadPenilaian;
+    $detailNilai = Detailpenilaian::model()->kompetensinilaiArray($model->id);
+    $detailUraian = Uraiankompetensi::model()->uraianKompetensiArray($model->id);
+    $kompetensiForm = $this->renderFormKompetensi($model->skj_id, $model->itemskj_id, array('nilai' => $detailNilai, 'uraian' => $detailUraian, 'model' => $model, 'preview' => true));
+    $kompetensiForm['ringkasan'] = $this->ringkasanProfil($detailNilai);
+    $kompetensiForm['jabatan'] = Jabatan::model()->findByPk($model->itemskj->jabatan_id);
+    $this->render('_preview_penilaian', array(
+        'model' => $model,
+        'peserta' => $loadPeserta,
+        'output' => $kompetensiForm,
+        'departement_id'=>$departement_id
+            /* 'model'=>$model,
+              'output'=> $kompetensiForm,
+             */
+    ));
+  }
+  
   /*
    * download Action report
    * 
@@ -209,9 +240,12 @@ class LaporanController extends Controller
   private function renderFormKompetensi($skjid,$itemskjid,$params = array()){
 		$modelkompetensisjk = Kompetensiskj::model()->getItemKompetensiById($skjid,$itemskjid);
 		$params['itemkompetensi'] = $modelkompetensisjk;
+    
+    $departement_id =  (!empty($params['model']->departement_id)) ? $params['model']->departement_id : $this->module->current_departement_id;
+    $params['departement_id'] = $departement_id;
 		switch($params['onview']){
 		case 'doc':
-      $profile_template = Yii::app()->params['sub_template'][$this->module->current_departement_id]['profile_kompetensi'];
+      $profile_template = Yii::app()->params['sub_template'][$departement_id]['profile_kompetensi'];
 			$output['loadkompetensi'] = $this->renderPartial($profile_template.'_cetak',$params,true,true);
 			
 			$output['uraianKompetensi'] = $this->renderPartial('//masters/pesertaasesor/_cetak_penilaian_uraian_kompetensi',$params,true,true);
@@ -221,12 +255,12 @@ class LaporanController extends Controller
 			break;
 		default:
 			
-			$output['loadkompetensi'] = $this->renderPartial('masters/pesertaasesor/_form_penilaian_kompetensi',$params,true,true);
+			$output['loadkompetensi'] = $this->renderPartial('//masters/pesertaasesor/_form_penilaian_kompetensi',$params,true,true);
 			
-			$output['uraianKompetensi'] = $this->renderPartial('masters/pesertaasesor/_form_penilaian_uraian_kompetensi',$params,true,true);
+			$output['uraianKompetensi'] = $this->renderPartial('//masters/pesertaasesor/_form_penilaian_uraian_kompetensi',$params,true,true);
 			$params['ringkasan'] = $this->ringkasanProfil($params['nilai']);
-			$output['ringkasanKompetensi'] = $this->renderPartial('masters/pesertaasesor/_ringkasan_penilaian_kompetensi',$params,true,true);
-			$output['saranpengembangan'] = $this->renderPartial('masters/pesertaasesor/_penilaian_saran_pengembangan',$params,true,true);
+			$output['ringkasanKompetensi'] = $this->renderPartial('//masters/pesertaasesor/_ringkasan_penilaian_kompetensi',$params,true,true);
+			$output['saranpengembangan'] = $this->renderPartial('//masters/pesertaasesor/_penilaian_saran_pengembangan',$params,true,true);
 			break;
 		}
 		return $output;
