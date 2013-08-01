@@ -29,14 +29,14 @@ class Assessment extends CModel
 							); 
 	
 	public $REKOMENDASI = array('2' => array("KP" => array('caption'=>'KURANG POTENSIAL',
-														   'MAX'=>80,
+														   'MAX'=>80.49,
 														   'MIN'=>0),
 											 "PC" => array('caption'=>'POTENSIAL DENGAN CATATAN',
-														   'MAX'=>95,
-														   'MIN'=>81),
+														   'MAX'=>95.49,
+														   'MIN'=>80.50),
 											 "P" => array('caption'=>'POTENSIAL',
 														   //'MAX'=>100,
-														   'MIN'=>96),
+														   'MIN'=>95.50),
 											 ), // kemenhub
 							'1'=> '(((input/standard)*(jenis/100))/jumlahkompetensi)*100', // KPK
 							);
@@ -152,7 +152,7 @@ class Assessment extends CModel
     foreach ((array) $penilaian as $row){
       $pid = $row->id;
       unset($nilai);
-      $nilai = round($this->__calculation($pid));
+      $nilai = round($this->__calculation($pid),2);
       $updatePenilaian = $row;
       $updatePenilaian->persentase_pemenuhan = $nilai;
       $updatePenilaian->rekomendasi = $this->__getRekomendasi($departement,$nilai);

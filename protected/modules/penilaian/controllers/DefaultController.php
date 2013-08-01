@@ -14,7 +14,7 @@ class DefaultController extends Controller
 	public function accessRules() {
 		return array(
 				array('allow',
-					'actions'=>array('index','LoadProcessing'),
+					'actions'=>array('index','LoadProcessing','allcalculate'),
 					'users' => array('@'),
 					),
 				array('allow',
@@ -42,6 +42,16 @@ class DefaultController extends Controller
 		
 	}
 	
+	public function actionAllcalculate(){
+    $departement_id = 2;//kemenhub
+    /*$criteria=new CDbCriteria;
+    if ($departement_id)
+			$criteria->compare('departement_id',$departement_id);
+     * 
+     */
+    Assessment::model()->setAllRekomendasi($departement_id);
+  }
+  
 	public function actionLoadProcessing(){
 		$criteria=new CDbCriteria;
 		if ($this->module->current_departement_id)
